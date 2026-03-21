@@ -47,22 +47,16 @@ verify-integrity [options] <file> <expected_hash>
 verify-integrity ./myfile.zip abc123def456...
 ```
 
-**Specify a different algorithm:**
+**Specifying a different algorithm:**
 
 ```bash
 verify-integrity -a sha512 ./myfile.tar.gz <expected_sha512_hash>
 ```
 
-**Use MD5:**
+**Partial hash matching** (useful when you only have a short hash prefix):
 
 ```bash
-verify-integrity -a md5 ./archive.zip <expected_md5_hash>
-```
-
-**Partial hash match** (useful when you only have a short hash prefix):
-
-```bash
-verify-integrity -p ./myfile.zip abc123
+verify-integrity -p ./myfile.zip abcd1234
 ```
 
 ## Supported Algorithms
