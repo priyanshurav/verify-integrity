@@ -1,0 +1,67 @@
+{
+  "name": "verify-integrity",
+  "version": "1.0.0",
+  "bin": {
+    "verify-integrity": "dist/cli.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "description": "A modern CLI tool to easily generate and verify file hashes.",
+  "license": "MIT",
+  "homepage": "https://github.com/priyanshurav/verify-integrity#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priyanshurav/verify-integrity.git"
+  },
+  "bugs": {
+    "url": "https://github.com/priyanshurav/verify-integrity/issues"
+  },
+  "author": {
+    "name": "Priyanshu Rav",
+    "url": "https://github.com/priyanshurav/"
+  },
+  "type": "module",
+  "scripts": {
+    "pretest": "npm run build",
+    "test": "node --import tsx --test",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc",
+    "start": "tsc && node .",
+    "lint": "eslint ."
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "provenance": true
+  },
+  "keywords": [
+    "cli",
+    "hash",
+    "checksum",
+    "verify",
+    "integrity",
+    "crypto",
+    "file-hash",
+    "sha256",
+    "sha512",
+    "md5",
+    "shasum",
+    "streaming"
+  ],
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.5.0",
+    "eslint": "^10.0.3",
+    "globals": "^17.4.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.1"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^14.0.3",
+    "ora": "^9.3.0"
+  }
+}
