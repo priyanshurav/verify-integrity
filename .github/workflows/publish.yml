@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   publish:
+    if: github.repository == 'priyanshurav/verify-integrity'
     runs-on: ubuntu-latest
     environment: Release
     steps:
