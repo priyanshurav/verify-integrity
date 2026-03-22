@@ -1,13 +1,16 @@
 import { createHash } from 'node:crypto';
 import { createReadStream } from 'node:fs';
+import path from 'node:path';
 
-export const generateHash = (absoluteFilePath: string, algorithm: string): Promise<string> => {
+export const generateHash = (filePath: string, algorithm: string): Promise<string> => {
   return new Promise((resolve, reject) => {
-    if (!absoluteFilePath) return reject(new Error('The file path provided is empty or invalid.'));
+    if (!filePath) return reject(new Error('The file path provided is empty or invalid.'));
     if (!algorithm) return reject(new Error('A hashing algorithm must be specified.'));
 
     const hash = createHash(algorithm);
-    const stream = createReadStream(absoluteFilePath);
+
+    const stream =
+      filePath === '-' ? process.stdin : createReadStream(path.resolve(process.cwd(), filePath));
 
     stream.on('error', (e) => reject(e));
 

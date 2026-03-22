@@ -2,7 +2,6 @@
 
 import { Command, Option } from 'commander';
 import { generateHash } from './generateHash.js';
-import path from 'node:path';
 import { getHashes } from 'node:crypto';
 import ora, { type Ora } from 'ora';
 import chalk from 'chalk';
@@ -49,8 +48,7 @@ async function main() {
   }
 
   try {
-    const absoluteFilePath = path.resolve(process.cwd(), filePath || '');
-    const generatedHash = await generateHash(absoluteFilePath, algorithm);
+    const generatedHash = await generateHash(filePath, algorithm);
     if (!quiet) spinner?.stop();
     const hashedMatched = doHashesMatch(expectedHash, generatedHash, partial);
     if (hashedMatched) {
