@@ -118,4 +118,26 @@ describe('CLI End-to-End Execution', () => {
       assert.ok(error.stderr.includes('ENOENT'));
     }
   });
+
+  it('should exit with code 0 on a match when reading from stdin using the "-" flag', async () => {
+    const { stdout } = await execAsync(
+      `node -e "process.stdout.write('${testFileContent}')" | node "${cliPath}" - ${testFileHashSHA256}`
+    );
+    assert.ok(stdout.includes(messages.hashesMatch));
+  });
+
+  it('should exit with code 1 on a hash mismatch when reading from stdin using the "-" flag', async () => {
+    const wrongHash = '1234567890abcdef';
+    try {
+      await execAsync(
+        `node -e "process.stdout.write('${testFileContent}')" | node "${cliPath}" - ${wrongHash}`
+      );
+      assert.fail('CLI should have exited with an error');
+    } catch (err) {
+      const error = err as { code: number | string; stdout: string; stderr: string };
+      if (error.code === 'ERR_ASSERTION') throw err;
+      assert.strictEqual(error.code, 1);
+      assert.ok(error.stdout.includes(messages.hashesDidNotMatch));
+    }
+  });
 });

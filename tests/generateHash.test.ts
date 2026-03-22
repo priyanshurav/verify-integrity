@@ -3,7 +3,7 @@ import { after, before, describe, it } from 'node:test';
 import assert from 'node:assert';
 import { createTempFile } from './utils/fs.js';
 import { cleanupTempDir } from './utils/fs.js';
-import { testFileContent, testFileHashSHA256 } from './fixtures/testFile.js';
+import { testFileContent, testFileHashSHA256, testFileHashSHA512 } from './fixtures/testFile.js';
 import path from 'node:path';
 
 describe('generateHash()', () => {
@@ -25,6 +25,10 @@ describe('generateHash()', () => {
     it('should correctly calculate a SHA-256 hash', async () => {
       const hash = await generateHash(testFilePath, 'sha256');
       assert.strictEqual(hash, testFileHashSHA256);
+    });
+    it('should correctly calculate a SHA-512 hash', async () => {
+      const hash = await generateHash(testFilePath, 'sha512');
+      assert.strictEqual(hash, testFileHashSHA512);
     });
   });
 
