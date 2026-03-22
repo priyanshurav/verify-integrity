@@ -24,10 +24,10 @@ verify-integrity [options] <file> <expected_hash>
 
 ### Arguments
 
-| Argument        | Description                                 |
-| --------------- | ------------------------------------------- |
-| `file`          | Path to the file you want to verify         |
-| `expected_hash` | The expected hash string to compare against |
+| Argument        | Description                                                     |
+| --------------- | --------------------------------------------------------------- |
+| `file`          | Path to the file you want to verify. Use `-` to read from stdin |
+| `expected_hash` | The expected hash string to compare against                     |
 
 ### Options
 
@@ -44,19 +44,25 @@ verify-integrity [options] <file> <expected_hash>
 **Basic SHA-256 verification (default):**
 
 ```bash
-verify-integrity ./myfile.zip abc123def456...
+verify-integrity ./myfile.zip b94d27b9934d3e08...
 ```
 
 **Specifying a different algorithm:**
 
 ```bash
-verify-integrity -a sha512 ./myfile.tar.gz <expected_sha512_hash>
+verify-integrity -a sha512 ./myfile.tar.gz 9b71d224bd62f378...
 ```
 
 **Partial hash matching** (useful when you only have a short hash prefix):
 
 ```bash
-verify-integrity -p ./myfile.zip abcd1234
+verify-integrity -p ./myfile.zip b94d27b9
+```
+
+**Reading from stdin:**
+
+```bash
+curl -sL https://example.com/file.zip | verify-integrity - b94d27b9934d3e08...
 ```
 
 ## Supported Algorithms
