@@ -1,13 +1,13 @@
 {
   "name": "verify-integrity",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "bin": {
     "verify-integrity": "dist/cli.js"
   },
   "files": [
     "dist"
   ],
-  "description": "A modern CLI tool to easily generate and verify file hashes.",
+  "description": "A modern, zero-dependency CLI tool to easily verify file hashes.",
   "license": "MIT",
   "homepage": "https://github.com/priyanshurav/verify-integrity#readme",
   "repository": {
@@ -23,15 +23,15 @@
   },
   "type": "module",
   "scripts": {
-    "pretest": "npm run build",
+    "pretest": "pnpm run build",
     "test": "node --import tsx --test",
     "typecheck": "tsc --noEmit",
-    "build": "tsc",
-    "start": "tsc && node .",
+    "build": "tsup",
+    "dev": "tsup --watch",
     "lint": "eslint ."
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=18.11.0"
   },
   "keywords": [
     "cli",
@@ -52,13 +52,16 @@
     "@types/node": "^25.5.0",
     "eslint": "^10.0.3",
     "globals": "^17.4.0",
+    "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.1"
   },
-  "dependencies": {
-    "chalk": "^5.6.2",
-    "commander": "^14.0.3",
-    "ora": "^9.3.0"
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.5.0",
+      "onFail": "download"
+    }
   }
 }
