@@ -9,6 +9,7 @@
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
     "noImplicitReturns": true,
+    "noImplicitAny": true,
     "noImplicitOverride": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
