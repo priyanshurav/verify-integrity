@@ -6,12 +6,10 @@ export const createColours = (noColour: boolean) => {
   };
   const colours = {
     yellow: (message) => format('33', message),
-    red: (message) => format('31', message),
-    redDim: (message) => format('2;31', message),
-    redBold: (message) => format('1;31', message),
-    green: (message) => format('32', message),
-    greenDim: (message) => format('2;32', message),
-    greenBold: (message) => format('1;32', message),
+    red: (message) => format('91', message),
+    redBold: (message) => format('1;91', message),
+    greenDim: (message) => format('32', message),
+    greenBold: (message) => format('1;92', message),
     cyan: (message) => format('36', message),
     cyanBold: (message) => format('1;36', message),
   } satisfies Record<string, Colour>;
