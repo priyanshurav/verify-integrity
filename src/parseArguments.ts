@@ -37,11 +37,6 @@ const options = {
     type: 'boolean',
     default: false,
   },
-  // hidden alias of --no-color
-  'no-colour': {
-    type: 'boolean',
-    default: false,
-  },
 } as const satisfies ParseArgsOptionsConfig;
 
 export function parseArguments(): ParsedArgs {
@@ -52,7 +47,6 @@ export function parseArguments(): ParsedArgs {
 
   const [filePath, expectedHash] = positionals;
   const { partial, quiet, algorithm, buffer, version, help } = values;
-  const noColor = values['no-colour'] || values['no-color'];
 
   return {
     filePath,
@@ -61,7 +55,7 @@ export function parseArguments(): ParsedArgs {
     quiet,
     algorithm: algorithm ?? '',
     bufferSize: buffer,
-    noColor,
+    noColor: values['no-color'],
     version,
     help,
   };
