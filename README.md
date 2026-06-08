@@ -1,6 +1,6 @@
 # verify-integrity
 
-> A modern CLI tool to easily generate and verify file hashes.
+> A modern, zero-dependency CLI tool to easily verify file hashes.
 
 ## Installation
 
@@ -31,13 +31,15 @@ verify-integrity [options] <file> <expected_hash>
 
 ### Options
 
-| Option                    | Description                                                           | Default  |
-| ------------------------- | --------------------------------------------------------------------- | -------- |
-| `-a, --algorithm <value>` | Hashing algorithm to use                                              | `sha256` |
-| `-p, --partial`           | Allow a partial match — checks if the expected value is a hash prefix | `false`  |
-| `-q, --quiet`             | Suppress all visual output                                            | `false`  |
-| `-V, --version`           | Output the version number                                             |          |
-| `-h, --help`              | Display help for command                                              |          |
+| Option                   | Description                                                                         | Default  |
+| ------------------------ | ----------------------------------------------------------------------------------- | -------- |
+| `-a, --algorithm <algo>` | Hashing algorithm to use                                                            | `sha256` |
+| `-b, --buffer <size>`    | Read buffer size in MiB (integer)                                                   | `4`      |
+| `-p, --partial`          | Allow a partial match — checks if the expected value is a hash prefix (min 4 chars) | `false`  |
+| `-q, --quiet`            | Suppress all output                                                                 | `false`  |
+| `--no-color`             | Disable colored output                                                              | `false`  |
+| `-V, --version`          | Output the version number                                                           |          |
+| `-h, --help`             | Display help for command                                                            |          |
 
 ## Examples
 
@@ -65,6 +67,18 @@ verify-integrity -p ./myfile.zip b94d27b9
 curl -sL https://example.com/file.zip | verify-integrity - b94d27b9934d3e08...
 ```
 
+**Large file with increased buffer size** (reduces I/O overhead for multi-GB files):
+
+```bash
+verify-integrity -b 8 ./large-file.zip b94d27b9934d3e08...
+```
+
+**Memory-constrained environment with reduced buffer size:**
+
+```bash
+verify-integrity -b 1 ./myfile.zip b94d27b9934d3e08...
+```
+
 ## Supported Algorithms
 
 The CLI supports the following standard algorithms (dynamically verified against your system's OpenSSL environment):
@@ -78,7 +92,7 @@ The CLI supports the following standard algorithms (dynamically verified against
 
 ## Requirements
 
-- Node.js `>= 20`
+- Node.js `>=18.11.0`
 
 ## License
 
