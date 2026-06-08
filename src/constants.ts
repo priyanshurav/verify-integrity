@@ -1,14 +1,22 @@
-const isWindows = process.platform === 'win32';
+import { getHashes } from 'node:crypto';
+import type { Algorithm } from './types.js';
 
 export const icons = {
-  success: isWindows ? '√' : '✔',
-  error: isWindows ? 'X' : '✖',
-  warning: isWindows ? '‼' : '⚠',
+  success: '✓',
+  error: '✗',
+  warning: '!!',
 } as const;
 
-export const messages = {
-  hashesMatch: 'Hashes matched! Integrity verified.',
-  hashesDidNotMatch: 'Hashes did not match! Integrity verification failed.',
-  shortHashWarning:
-    'Warning: Verifying with less than 8 characters is insecure and may result in false positives.',
+export const MIN_HASH_ERROR_LENGTH = 4;
+export const MIN_HASH_WARN_LENGTH = 8;
+export const DEFAULT_BUFFER_SIZE = 4; // in MiB
+
+export const HASHES = {
+  sha256: { hexLength: 64 },
+  sha512: { hexLength: 128 },
+  sha1: { hexLength: 40 },
+  md5: { hexLength: 32 },
 } as const;
+
+export const ALGORITHMS = Object.freeze(Object.keys(HASHES).filter((a) => getHashes().includes(a)) as Algorithm[]);
+export const WEAK_ALGORITHMS = Object.freeze(['md5', 'sha1'] as Algorithm[]);
